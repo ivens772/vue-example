@@ -2,17 +2,23 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-     ¿Quieres Casarte con migo?
+      ¿Quieres Casarte con migo?
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
-     <input type="text" v-model="answer" placeholder="responde aqui">
-     <button @click="respuesta">Respuesta</button>
+    <div>
+      <input type="text" v-model="inputValue" />
+      <button @click="showAlert">respuesta</button>
+    </div>
     <h3>Installed CLI Plugins</h3>
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
+      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank"
+          rel="noopener">babel</a></li>
+      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank"
+          rel="noopener">router</a></li>
+      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank"
+          rel="noopener">eslint</a></li>
+      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank"
+          rel="noopener">typescript</a></li>
     </ul>
     <h3>Essential Links</h3>
     <ul>
@@ -26,7 +32,8 @@
     <ul>
       <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
       <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
+      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a>
+      </li>
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
@@ -41,20 +48,30 @@ export default defineComponent({
   props: {
     msg: String,
   },
-  data(){
+  data() {
     return {
-      answer :''
+      inputValue: '', // Initialize input value with empty string
     };
   },
-  methods:{
-    respuesta:()=>{
-      if (this.answer === "si" || this.answer === "SI") {
-        alert(`ud ha colocado que ${this.answer}: felicidades`)
-      }else{
-        alert("vayase a dormir")
-      }
-    }
-  }
+  methods: {
+    showAlert() {
+       if (this.inputValue === "si" || this.inputValue === "SI") {
+        this.$swal({
+        title: "En Hora Buena!!!",
+        text: "Pronto tu vida sera compartida con este pokemon",
+        icon: "success"
+      });
+      this.inputValue = ""
+       }else{
+        this.$swal({
+        title: "tus respuesta no es valida",
+        text: "solo podes decir SI o si punto",
+        icon: "error"
+      });
+      this.inputValue = ""
+       }
+    },
+  },
 });
 </script>
 
@@ -63,14 +80,17 @@ export default defineComponent({
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }
