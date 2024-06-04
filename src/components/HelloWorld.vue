@@ -48,7 +48,7 @@ export default defineComponent({
   },
   methods:{
     respuesta:()=>{
-      if (this.answer === "si") {
+      if (this.answer === "si" || this.answer === "SI") {
         alert(`ud ha colocado que ${this.answer}: felicidades`)
       }else{
         alert("vayase a dormir")
